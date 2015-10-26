@@ -1,0 +1,53 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../iron-ajax/iron-ajax.html">
+
+<dom-module id="data-component">
+  <template>
+    <style>
+      :host {
+        font-family: sans-serif;
+      };
+    </style>
+    
+    <h3>Eigen demo</h3>
+    
+    <iron-ajax
+            id="ajax"
+            auto
+            url="../data.json"
+            handle-as="json"
+            last-response="{{jsondata}}"
+            on-response="hresponse">
+    </iron-ajax>
+    
+    <!-- <template is="dom-repeat" items="{{jsondata}}">-->
+    <!--    <div><span>{{item.id}}</span></div>-->
+    <!--</template>-->
+    
+     <!--<paper-card elevation="1">-->
+     
+       <!--
+       
+       
+    <!--</paper-card>-->
+    
+    <template is="dom-repeat" items="{{jsondata}}">
+        <div><span>{{item.name}}</span></div>
+        <div><span>{{item.description}}</span></div>
+        <div><span>{{item.specs}}</span></div>
+        <p>  </p>
+    </template>
+    
+  </template>
+  
+   <script>
+    Polymer({
+      is: "data-component",
+       hresponse: function(request) {
+    console.log(request.detail.response);
+    console.log(this.$.ajax.lastResponse);
+  }
+    });
+  </script>
+  
+</dom-module>
